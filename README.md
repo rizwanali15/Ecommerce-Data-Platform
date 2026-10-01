@@ -40,14 +40,6 @@ This project demonstrates the process of ingesting, transforming, cleaning, and 
 * Exploratory Data Analysis
 * Relational data modeling
 
-## Setup
-
-1. Clone this repository.
-2. Install the required Python dependencies using `pip install -r requirements.txt`.
-3. Configure your database connection using your own environment variables.
-4. Create the database and schemas using the DDL scripts.
-5. Execute the ingestion scripts and stored procedures in the appropriate order.
-
 ## Project Status
 
 Developed as a hands-on Data Engineering portfolio project.
