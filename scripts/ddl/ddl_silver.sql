@@ -5,18 +5,6 @@ DDL Script: Create Silver Tables
 Purpose:
     Creates Silver layer tables for cleaned, standardized, and structured data.
 
-Tables:
-    silver.products
-    silver.products_reviews
-    silver.products_tags
-    silver.users
-    silver.users_address
-    silver.users_bank
-    silver.users_company
-    silver.users_crypto
-    silver.carts
-    silver.carts_products
-
 Source:
     Bronze layer tables populated from the E-commerce API.
 
@@ -27,6 +15,10 @@ Notes:
     - Tables are recreated when the script is executed.
 ===============================================================================
 */
+
+-- ============================================================================
+-- products
+-- ============================================================================
 
 IF OBJECT_ID ('silver.products', 'U') IS NOT NULL
 	DROP TABLE silver.products;
@@ -54,6 +46,10 @@ CREATE TABLE silver.products(
 	Updated_At DATETIME2
 );
 
+-- ============================================================================
+-- products_reviews
+-- ============================================================================
+
 IF OBJECT_ID ('silver.products_reviews', 'U') IS NOT NULL
 	DROP TABLE silver.products_reviews;
 CREATE TABLE silver.products_reviews(
@@ -66,6 +62,10 @@ CREATE TABLE silver.products_reviews(
 	Reviewer_Email VARCHAR(150)
 );
 
+-- ============================================================================
+-- products_tags
+-- ============================================================================
+
 IF OBJECT_ID('silver.products_tags', 'U') IS NOT NULL
 	DROP TABLE silver.products_tags;
 CREATE TABLE silver.products_tags(
@@ -73,6 +73,10 @@ CREATE TABLE silver.products_tags(
 	Product_Id INT FOREIGN KEY REFERENCES silver.products(Id),
 	Tag VARCHAR(50)
 );	
+
+-- ============================================================================
+-- users
+-- ============================================================================
 
 IF OBJECT_ID('silver.users', 'U') IS NOT NULL
 	DROP TABLE silver.users;
@@ -103,6 +107,10 @@ CREATE TABLE silver.users(
 	Role VARCHAR(50)
 );
 
+-- ============================================================================
+-- users_address
+-- ============================================================================
+
 IF OBJECT_ID('silver.users_address', 'U') IS NOT NULL
 	DROP TABLE silver.users_address;
 CREATE TABLE silver.users_address(
@@ -118,6 +126,10 @@ CREATE TABLE silver.users_address(
 	Country VARCHAR(30)
 );
 
+-- ============================================================================
+-- users_bank
+-- ============================================================================
+
 IF OBJECT_ID('silver.users_bank', 'U') IS NOT NULL
 	DROP TABLE silver.users_bank;
 CREATE TABLE silver.users_bank(
@@ -129,6 +141,10 @@ CREATE TABLE silver.users_bank(
 	Currency VARCHAR(20),
 	Iban VARCHAR(50)
 );
+
+-- ============================================================================
+-- users_company
+-- ============================================================================
 
 IF OBJECT_ID('silver.users_company', 'U') IS NOT NULL
 	DROP TABLE silver.users_company;
@@ -148,6 +164,10 @@ CREATE TABLE silver.users_company(
 	Country VARCHAR(50)
 );
 
+-- ============================================================================
+-- users_crypto
+-- ============================================================================
+
 IF OBJECT_ID('silver.users_crypto', 'U') IS NOT NULL
 	DROP TABLE silver.users_crypto;
 CREATE TABLE silver.users_crypto(
@@ -157,6 +177,10 @@ CREATE TABLE silver.users_crypto(
 	Wallet VARCHAR(150),
 	Network VARCHAR(100)
 );
+
+-- ============================================================================
+-- carts
+-- ============================================================================
 
 IF OBJECT_ID('silver.carts', 'U') IS NOT NULL
 	DROP TABLE silver.carts;
@@ -168,6 +192,10 @@ CREATE TABLE silver.carts(
 	Total_Products INT,
 	Total_Quantity INT
 );
+
+-- ============================================================================
+-- carts_products
+-- ============================================================================
 
 IF OBJECT_ID('silver.carts_products', 'U') IS NOT NULL
 	DROP TABLE silver.carts_products;
