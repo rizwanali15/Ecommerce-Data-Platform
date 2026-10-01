@@ -22,6 +22,8 @@ Notes:
 
 IF OBJECT_ID ('silver.products', 'U') IS NOT NULL
 	DROP TABLE silver.products;
+GO
+	
 CREATE TABLE silver.products(
 	Id INT PRIMARY KEY,
 	Title VARCHAR(100),
@@ -52,6 +54,8 @@ CREATE TABLE silver.products(
 
 IF OBJECT_ID ('silver.products_reviews', 'U') IS NOT NULL
 	DROP TABLE silver.products_reviews;
+GO
+	
 CREATE TABLE silver.products_reviews(
 	Review_Id INT IDENTITY(1,1) PRIMARY KEY,
 	Product_ID INT FOREIGN KEY REFERENCES silver.products(Id),
@@ -68,6 +72,8 @@ CREATE TABLE silver.products_reviews(
 
 IF OBJECT_ID('silver.products_tags', 'U') IS NOT NULL
 	DROP TABLE silver.products_tags;
+GO
+	
 CREATE TABLE silver.products_tags(
 	Tag_id INT IDENTITY(1,1) PRIMARY KEY,
 	Product_Id INT FOREIGN KEY REFERENCES silver.products(Id),
@@ -80,6 +86,8 @@ CREATE TABLE silver.products_tags(
 
 IF OBJECT_ID('silver.users', 'U') IS NOT NULL
 	DROP TABLE silver.users;
+GO
+	
 CREATE TABLE silver.users(
 	Id INT PRIMARY KEY,
 	First_Name VARCHAR(50),
@@ -113,6 +121,8 @@ CREATE TABLE silver.users(
 
 IF OBJECT_ID('silver.users_address', 'U') IS NOT NULL
 	DROP TABLE silver.users_address;
+GO
+	
 CREATE TABLE silver.users_address(
 	Address_Id INT IDENTITY(1,1) PRIMARY KEY,
 	User_Id INT FOREIGN KEY REFERENCES silver.users(Id),
@@ -132,6 +142,8 @@ CREATE TABLE silver.users_address(
 
 IF OBJECT_ID('silver.users_bank', 'U') IS NOT NULL
 	DROP TABLE silver.users_bank;
+GO
+	
 CREATE TABLE silver.users_bank(
 	Bank_Id INT IDENTITY(1,1) PRIMARY KEY,
 	User_Id INT FOREIGN KEY REFERENCES silver.users(Id),
@@ -148,6 +160,8 @@ CREATE TABLE silver.users_bank(
 
 IF OBJECT_ID('silver.users_company', 'U') IS NOT NULL
 	DROP TABLE silver.users_company;
+GO
+	
 CREATE TABLE silver.users_company(
 	Company_Id INT IDENTITY(1,1) PRIMARY KEY,
 	User_Id INT FOREIGN KEY REFERENCES silver.users(Id),
@@ -170,6 +184,8 @@ CREATE TABLE silver.users_company(
 
 IF OBJECT_ID('silver.users_crypto', 'U') IS NOT NULL
 	DROP TABLE silver.users_crypto;
+GO
+	
 CREATE TABLE silver.users_crypto(
 	Crypto_Id INT IDENTITY(1,1) PRIMARY KEY,
 	User_Id INT FOREIGN KEY REFERENCES silver.users(Id),
@@ -184,6 +200,8 @@ CREATE TABLE silver.users_crypto(
 
 IF OBJECT_ID('silver.carts', 'U') IS NOT NULL
 	DROP TABLE silver.carts;
+GO
+	
 CREATE TABLE silver.carts(
 	Id INT PRIMARY KEY,
 	Total DECIMAL(10,2),
@@ -199,6 +217,8 @@ CREATE TABLE silver.carts(
 
 IF OBJECT_ID('silver.carts_products', 'U') IS NOT NULL
 	DROP TABLE silver.carts_products;
+GO
+	
 CREATE TABLE silver.carts_products(
 	Carts_Product_Id INT IDENTITY(1,1) PRIMARY KEY,
 	Cart_ID INT FOREIGN KEY REFERENCES silver.carts(Id),
