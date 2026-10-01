@@ -1,5 +1,32 @@
+/*
+===============================================================================
+DDL Script: Create Silver Tables
+===============================================================================
+Purpose:
+    Creates Silver layer tables for cleaned, standardized, and structured data.
 
--- Create Silver Tables
+Tables:
+    silver.products
+    silver.products_reviews
+    silver.products_tags
+    silver.users
+    silver.users_address
+    silver.users_bank
+    silver.users_company
+    silver.users_crypto
+    silver.carts
+    silver.carts_products
+
+Source:
+    Bronze layer tables populated from the E-commerce API.
+
+Notes:
+    - Nested JSON data is flattened into relational tables.
+    - Data types are standardized.
+    - Primary and foreign key relationships are applied.
+    - Tables are recreated when the script is executed.
+===============================================================================
+*/
 
 IF OBJECT_ID ('silver.products', 'U') IS NOT NULL
 	DROP TABLE silver.products;
@@ -155,7 +182,3 @@ CREATE TABLE silver.carts_products(
 	Discount_Percentage DECIMAL(10,2),
 	Discounted_Total DECIMAL(10,2)
 );
-
-
-
-SELECT * FROM silver.users_crypto

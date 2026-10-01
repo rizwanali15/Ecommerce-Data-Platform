@@ -1,36 +1,29 @@
+/*
+===============================================================================
+DDL Script: Create Bronze Tables
+===============================================================================
+Script Purpose:
+    Creates the tables of the Bronze layer (raw API data).
+    Data is stored exactly as it comes from the source, with no cleaning.
+    Nested JSON fields (e.g. users.address, users.bank, products.reviews,
+    carts.products) are kept as raw text and are flattened later in Silver.
+ 
+Tables  : bronze.products, bronze.users, bronze.carts
+Source  : E-commerce API (extracted and loaded using Python)
+Notes   : Column names follow the source (camelCase).
+          Run this script to redefine the DDL structure of the Bronze tables.
+          Data is loaded by: proc_load_bronze.sql
+===============================================================================
+*/
 
-Use master;
-GO
-
--- Drop and recreate the 'EcommerceDWH' database
-IF EXISTS(SELECT 1 FROM sys.databases WHERE name = 'EcommerceDWH')
-BEGIN 
-	ALTER DATABASE EcommerceDWH SET SIGNLE_USER WITH ROLLBACK IMMEDIATE;
-	DROP DATABASE EcommerceDWH;
-END;
-GO
-
--- Create Database 'EcommerceDWH'
-CREATE DATABASE EcommerceDWH;
-GO
-
-USE EcommerceDWH;
-GO
-
--- Create Schemas
-CREATE SCHEMA bronze;
-GO
-
-CREATE SCHEMA silver;
-GO
-
-CREATE SCHEMA gold;
-GO
-
--- Create Bronze Layer Tables
+-- ============================================================================
+-- products
+-- ============================================================================
 
 IF OBJECT_ID ('bronze.products', 'U') IS NOT NULL
 	DROP TABLE bronze.products;
+GO
+
 CREATE TABLE bronze.products(
 	id INT,
 	title VARCHAR(100),
@@ -55,9 +48,16 @@ CREATE TABLE bronze.products(
 	images VARCHAR(MAX),
 	thumbnail VARCHAR(150)
 );
+GO
+
+-- ============================================================================
+-- users
+-- ============================================================================
 
 IF OBJECT_ID ('bronze.users', 'U') IS NOT NULL 
 	DROP TABLE bronze.users;
+GO
+
 CREATE TABLE bronze.users(
 	id INT,
 	firstName VARCHAR(20),
@@ -88,9 +88,16 @@ CREATE TABLE bronze.users(
 	crypto VARCHAR(200),
 	role VARCHAR(20)
 );
+GO
+
+-- ============================================================================
+-- carts
+-- ============================================================================
 
 IF OBJECT_ID ('bronze.carts', 'U') IS NOT NULL
 	DROP TABLE bronze.carts;
+GO
+
 CREATE TABLE bronze.carts (
 	id INT,
 	products VARCHAR(max),
@@ -100,3 +107,4 @@ CREATE TABLE bronze.carts (
 	totalProducts INT,
 	totalQuantity INT
 );
+GO
